@@ -22,10 +22,10 @@ class PurchaseDetailFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id'->$this->faker->numberbetween(1,50),
-            'price'->$this->faker->numberbetween(1,50),
-            'product_id'->$this->faker->numberbetween(1,50),
-            'date'->$this->faker->dateTimeThisDecade(),
+            'shop_id'=>$this->faker->numberbetween(1,50),
+            'price'=>$this->faker->numberbetween(1,50),
+            'product_id'=>$this->faker->numberbetween(1,50),
+            'date'=>$this->faker->dateTimeThisDecade(),
         ];
     }
 }
