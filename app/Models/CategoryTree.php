@@ -13,4 +13,9 @@ class CategoryTree extends Model
         'parent_id',
         'child_id',
     ];
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'child_id');
+    }
 }
