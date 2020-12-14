@@ -15,8 +15,8 @@ class CreateCategoryTreesTable extends Migration
     {
         Schema::create('category_trees', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->unsigned();
-            $table->integer('child_id')->unsigned();
+            $table->bigInteger('parent_id')->unsigned();
+            $table->bigInteger('child_id')->unsigned();
             $table->foreign('parent_id')->references('id')->on('categories');
             $table->foreign('child_id')->references('id')->on('categories');
             $table->timestamps();
