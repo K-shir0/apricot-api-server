@@ -17,4 +17,10 @@ class Category extends Model
   {
     return $this->hasMany(CategoryTree::class, 'parent_id');
   }
+
+  //カテゴリー検索
+  public function scopeCategory($query, $search)
+  {
+    return $query->where('name', 'like', "%$search%");
+  }
 }
