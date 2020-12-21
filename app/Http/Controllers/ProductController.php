@@ -11,12 +11,10 @@ class ProductController extends Controller
     public function serch(Request $request){
         if($request->search != null)
         {
-            // $query= product::query();
             $search = $request->search;
-            // $query -> where('product_name', 'LIKE', "%$search%");
-            $query = product::ofType('$search')->get();
-            dd($query);
-            //$query ->where('category_id', $request->category_id)->Where('product_name', $request->name)->get();
+            $query = product::Product($search)->get();
+            //$query = product::where('product_name', 'like', "%$search%")->get();
+            //dd($search);
             return $query;
         }
         return 'その商品は在りません';

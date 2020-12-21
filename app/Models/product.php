@@ -16,7 +16,7 @@ class product extends Model
 
     public function scopeProduct($query, $search)
     {
-        return $query -> where('product_name', 'LIKE', "%$search%");
+        return $query->where('product_name', 'like', "%$search%");
     }
 
     public function product_name_all(){
