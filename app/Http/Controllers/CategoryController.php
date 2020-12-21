@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\CategoryTree;
 
 class CategoryController extends Controller
 {
@@ -13,10 +12,8 @@ class CategoryController extends Controller
         $child_id = Category::query()->with('children.categories')->find($category_id);
         return $child_id;
     }
-  }
 
-
-
+}
 
 
 
