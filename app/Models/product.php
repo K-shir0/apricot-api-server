@@ -14,6 +14,7 @@ class product extends Model
         'category_id',
     ];
 
+    //商品検索
     public function scopeProduct($query, $search)
     {
         return $query->where('product_name', 'like', "%$search%");
