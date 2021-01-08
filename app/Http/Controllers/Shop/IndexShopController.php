@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Store;
+namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class IndexStoreController extends Controller
+class IndexShopController extends Controller
 {
     /**
      * Handle the incoming request.

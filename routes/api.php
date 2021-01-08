@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Receipt\AddReceiptController;
-use App\Http\Controllers\Store\IndexStoreController;
+use App\Http\Controllers\Shop\IndexShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +25,6 @@ Route::prefix('receipt')->group(function () {
 });
 
 
-Route::prefix('store')->group(function () {
-    Route::get('/', IndexStoreController::class);
+Route::prefix('shop')->group(function () {
+    Route::get('/', IndexShopController::class);
 });
