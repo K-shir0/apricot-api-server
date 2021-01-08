@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Receipt;
 
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseDetail;
-use App\Models\Shop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class AddReceiptController extends Controller
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
     {
@@ -28,34 +27,26 @@ class AddReceiptController extends Controller
             'records.*.categoryId' => 'required|integer'
         ]);
 
-        //TODO　店を特定する
-        $shop = Shop::query()
-            ->where("shop_name", '=', $request->storeName)
-            ->firstOrFail();
-
-        $purchase_details = [];
         foreach ($request->records as $record) {
+            // モデルに各項目を埋める
             $purchase_detail = new PurchaseDetail();
+
             $purchase_detail->fill([
+                //TODO 仮置き
                 'shop_id' => 1,
                 'price' => $record["value"],
                 'date' => Carbon::createFromFormat(
                     'Y年m月d日',
                     $request->purchaseDate
                 ),
-                'product_id' => 1, //TODO 商品名から商品idを取得する処理
+                'product_id' => 1, //TODO 正規化商品名(name)とカテゴリから商品idを取得する処理、なければ作成
             ]);
 
-            $purchase_detail->append($purchase_details);
+            // DB に追加
+            $purchase_detail->save();
         }
 
-        return $purchase_details;
-
-        PurchaseDetail::query()->insert($purchase_details);
-
-        //TODO DBに追加
-
-
-        // ストアidとカテゴリを返す
+        // 成功レスポンスを返す
+        return response()->json(["message" => 'success']);
     }
 }
