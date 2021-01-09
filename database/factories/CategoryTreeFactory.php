@@ -24,6 +24,7 @@ class CategoryTreeFactory extends Factory
         return [
             'parent_id' => $this->faker->numberbetween(1,50),
             'child_id' => $this->faker->numberbetween(1,50),
+            'depth' => $this->faker->numberbetween(1, 3)
         ];
     }
 }

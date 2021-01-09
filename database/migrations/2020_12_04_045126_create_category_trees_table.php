@@ -17,6 +17,7 @@ class CreateCategoryTreesTable extends Migration
             $table->id();
             $table->bigInteger('parent_id')->unsigned();
             $table->bigInteger('child_id')->unsigned();
+            $table->bigInteger('depth')->unsigned();
             $table->foreign('parent_id')->references('id')->on('categories');
             $table->foreign('child_id')->references('id')->on('categories');
             $table->timestamps();
