@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseDetail extends Model
+class CategoryTree extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'shop_id',
-        'price',
-        'date',
-        'product_id',
+        'parent_id',
+        'child_id',
     ];
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'child_id');
+    }
 }

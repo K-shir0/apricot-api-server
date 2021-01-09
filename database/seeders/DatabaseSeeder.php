@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        \App\Models\Category::factory(50)->create();
+        \App\Models\Product::factory(50)->create();
+        \App\Models\Shop::factory(50)->create();
+        \App\Models\PurchaseDetail::factory(50)->create();
+        \App\Models\CategoryTree::factory(50)->create();
         // \App\Models\Category::factory(50)->create();
         // \App\Models\Product::factory(50)->create();
         // \App\Models\Shop::factory(50)->create();
@@ -68,7 +73,7 @@ class DatabaseSeeder extends Seeder
             ['name' => '魚'],
             ['name' => '鮮魚'],
             ['name' => 'その他（魚）'],
-            
+
             ['name' => '肉'],
             ['name' => '鶏肉'],
             ['name' => '牛肉'],
@@ -79,7 +84,7 @@ class DatabaseSeeder extends Seeder
             ['name' => '肉加工品'],
             ['name' => 'ハム・ベーコン'],
             ['name' => 'ソーセージ'],
-            ['name' => 'ローストビーフ'],  
+            ['name' => 'ローストビーフ'],
             ['name' => '生ハム'],
 
             ['name' => '惣菜'],
@@ -103,13 +108,13 @@ class DatabaseSeeder extends Seeder
             ['name' => '生クリーム'],
             ['name' => 'ホイップクリーム'],
             ['name' => 'バター・マーガリン'],
-            
+
             ['name' => '冷凍食品'],
             ['name' => '冷凍麺・パスタ'],
             ['name' => '冷凍弁当おかず'],
             ['name' => '冷凍惣菜'],
             ['name' => 'その他（冷凍食品）'],
-            ['name' => '卵'],																	
+            ['name' => '卵'],
 
             ['name' => '調味料'],
             ['name' => '甘味料・砂糖'],
@@ -183,7 +188,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'ビスケット・クッキー・クラッカー'],
             ['name' => 'おつまみ・珍味'],
             ['name' => 'せんべい'],
-            ['name' => 'ガム・アメ・ミント'],  
+            ['name' => 'ガム・アメ・ミント'],
             ['name' => 'プリン'],
             ['name' => 'ゼリー'],
             ['name' => 'ナッツ'],
@@ -363,6 +368,4 @@ class DatabaseSeeder extends Seeder
             ['name' => '消臭剤'],
         ]);
     }
-
 }
-

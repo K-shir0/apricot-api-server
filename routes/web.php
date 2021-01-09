@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryTreeController;
+use App\Http\Controllers\ProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//category_idから子のcategory_nameをとってくる
+Route::get('/category/{category_id}', [CategoryController::class, 'children']);
+
+
+//商品名とカテゴリーIDから商品IDをとってくる
+Route::get('/product', [ProductController::class, 'serch']);
+
+//category_top
+Route::get('/category_top', [CategoryTreeController::class, 'category_top']);

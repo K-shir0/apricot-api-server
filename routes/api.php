@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Receipt\AddReceiptController;
+use App\Http\Controllers\Shop\IndexShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('receipt')->group(function () {
+    Route::post('/', AddReceiptController::class);
+});
+
+
+Route::prefix('shop')->group(function () {
+    Route::get('/', IndexShopController::class);
 });
