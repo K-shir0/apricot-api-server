@@ -12,6 +12,7 @@ class CategoryTree extends Model
     protected $fillable = [
         'parent_id',
         'child_id',
+        'depth',
     ];
 
     public function categories()
