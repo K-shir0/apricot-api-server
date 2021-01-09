@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Franzose\ClosureTable\Models\ClosureTable;
