@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\CategoryTree;
+use App\Models\Product;
+use App\Models\PurchaseDetail;
+use App\Models\Shop;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,18 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        \App\Models\Category::factory(50)->create();
-        \App\Models\Product::factory(50)->create();
-        \App\Models\Shop::factory(50)->create();
-        \App\Models\PurchaseDetail::factory(50)->create();
-        \App\Models\CategoryTree::factory(50)->create();
-        // \App\Models\Category::factory(50)->create();
-        // \App\Models\Product::factory(50)->create();
-        // \App\Models\Shop::factory(50)->create();
-        // \App\Models\PurchaseDetail::factory(50)->create();
+        Category::factory(50)->create();
+        Product::factory(50)->create();
+        Shop::factory(50)->create();
+        PurchaseDetail::factory(50)->create();
+        CategoryTree::factory(50)->create();
 
-        \App\Models\Category::query()->insert([
+        Category::query()->insert([
             ['name' => '食料品'],
             ['name' => '野菜'],
             ['name' => 'たまねぎ'],
