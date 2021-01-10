@@ -11,7 +11,11 @@ class CategoryController extends Controller
     {
         return Category::query()
             ->findOrFail($category_id)
-            ->getChildren();
+            // 系統図を作成する
+            ->descendants()
+            // 孫まで取得する
+            ->where('depth', '<=', '2')
+            ->get()->toTree();
     }
 }
 
