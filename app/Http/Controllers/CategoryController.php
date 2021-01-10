@@ -11,8 +11,7 @@ class CategoryController extends Controller
 
         return Category::query()
             ->findOrFail($category_id)
-            ->children()
-            ->get();
+            ->getChildren();
     }
 
 }
