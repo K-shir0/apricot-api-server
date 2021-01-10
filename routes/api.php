@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CategoryTreeController;
+use App\Http\Controllers\Product\IndexProductController;
 use App\Http\Controllers\Receipt\AddReceiptController;
 use App\Http\Controllers\Shop\IndexShopController;
 use Illuminate\Http\Request;
@@ -32,11 +32,13 @@ Route::prefix('shop')->group(function () {
 });
 
 
-// カテゴリ
+// カテゴリルート
 Route::prefix('category')->group(function () {
-    // カテゴリのトップ
-    Route::get('/top', [CategoryTreeController::class, 'category_top']);
-
     // 子のカテゴリ
     Route::get('/{category_id}', [CategoryController::class, 'children']);
+});
+
+// 商品ルート
+Route::prefix('product')->group(function () {
+    Route::get('/', IndexProductController::class);
 });
