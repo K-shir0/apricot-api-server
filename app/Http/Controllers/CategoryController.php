@@ -9,7 +9,6 @@ class CategoryController extends Controller
     //category_idが送られてきたら、その子をすべて返す
     public function children($category_id)
     {
-
         return Category::query()
             ->findOrFail($category_id)
             ->getChildren();
