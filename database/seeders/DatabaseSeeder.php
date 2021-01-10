@@ -343,7 +343,7 @@ class DatabaseSeeder extends Seeder
             $node->save();
         }
 
-        Product::factory(50)->create();
+        Product::factory(5000)->create();
         Shop::factory(50)->create();
         PurchaseDetail::factory(50)->create();
     }
