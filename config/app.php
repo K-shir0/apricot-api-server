@@ -175,7 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Franzose\ClosureTable\ClosureTableServiceProvider::class
+        Franzose\ClosureTable\ClosureTableServiceProvider::class,
+        Grimzy\LaravelMysqlSpatial\SpatialServiceProvider::class,
+
 
     ],
 

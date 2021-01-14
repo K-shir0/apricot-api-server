@@ -16,6 +16,6 @@ class IndexShopController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return Shop::query()->get();
+        return Shop::query()->first()->get();
     }
 }

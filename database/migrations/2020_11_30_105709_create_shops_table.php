@@ -17,7 +17,7 @@ class CreateShopsTable extends Migration
             $table->string('id')->unique();
             $table->string('name');
             $table->string('address');
-            $table->geometry('positions');
+            $table->point('positions')->nullable();
             $table->string('geo_hash');
             $table->string('phone_number')->nullable();
             $table->timestamps();
