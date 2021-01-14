@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Category;
-use App\Models\Product;
-use App\Models\PurchaseDetail;
 use App\Models\Shop;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Sk\Geohash\Geohash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -343,8 +343,16 @@ class DatabaseSeeder extends Seeder
             $node->save();
         }
 
-        Product::factory(5000)->create();
-        Shop::factory(50)->create();
-        PurchaseDetail::factory(50)->create();
+//        Product::factory(5000)->create();
+        $g = new Geohash();
+        $shops = [
+            new Shop(['name' => 'test', 'address' => 'test', 'positions' => DB::raw("ST_GeomFromText('POINT(35.13988 136.96248)')"), 'geo_hash' => $g->encode(17.38000000, 78.42000000, 5)]),
+        ];
+
+        foreach ($shops as $shop) {
+            $shop->save();
+        }
+
+//        PurchaseDetail::factory(50)->create();
     }
 }
