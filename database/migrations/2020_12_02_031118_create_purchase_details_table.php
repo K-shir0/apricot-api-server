@@ -15,7 +15,7 @@ class CreatePurchaseDetailsTable extends Migration
     {
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('shop_id')->unsigned();
+            $table->string('shop_id');
             $table->bigInteger('price');
             $table->bigInteger('product_id')->unsigned();
             $table->datetime('date');
