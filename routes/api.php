@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Category\ShowCategoryPathController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Product\IndexProductController;
 use App\Http\Controllers\Receipt\AddReceiptController;
@@ -35,7 +36,8 @@ Route::prefix('shop')->group(function () {
 // カテゴリルート
 Route::prefix('category')->group(function () {
     // 子のカテゴリ
-    Route::get('/{category_id}', [CategoryController::class, 'children']);
+    Route::get('/show/children/{category_id}', [CategoryController::class, 'children']);
+    Route::get('/show/path/{category_id}', ShowCategoryPathController::class);
 });
 
 // 商品ルート
