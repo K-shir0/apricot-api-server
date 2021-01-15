@@ -37,7 +37,7 @@ Route::prefix('shop')->group(function () {
 Route::prefix('category')->group(function () {
     // 子のカテゴリ
     Route::get('/show/children/{category_id}', [CategoryController::class, 'children']);
-    Route::get('/show/path/{category_id}', ShowCategoryPathController::class);
+    Route::get('/show/path/{category}', ShowCategoryPathController::class);
 });
 
 // 商品ルート
