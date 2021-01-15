@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Sk\Geohash\Geohash;
 
 class IndexShopController extends Controller
 {
@@ -16,6 +17,18 @@ class IndexShopController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return Shop::query()->first()->get();
+        // 座標
+        $location = preg_split('[,]', $request->query('location'));
+
+        $shops = Shop::query();
+
+        if ($location) {
+            $g = new Geohash();
+            $present_location = $g->encode($location[0], $location[1], 6);
+            $neighbors = collect($g->getNeighbors($present_location))->add($present_location);
+            $shops->whereIn('geo_hash', $neighbors);
+        }
+
+        return $shops->get();
     }
 }
