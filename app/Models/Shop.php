@@ -16,4 +16,9 @@ class Shop extends Model
     protected $spatialFields = [
         'positions',
     ];
+
+    public function purchase_details()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
 }

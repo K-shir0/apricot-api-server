@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Category;
+use App\Models\Product;
+use App\Models\PurchaseDetail;
 use App\Models\Shop;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -344,6 +346,14 @@ class DatabaseSeeder extends Seeder
         }
 
 //        Product::factory(5000)->create();
+        $products = [
+            new Product(['category_id' => 246, 'name' => '十六茶']),
+        ];
+
+        foreach ($products as $product) {
+            $product->save();
+        }
+
         $g = new Geohash();
         $shops = [
             new Shop(['id' => 'ChIJC8bQfmznAGARrc26Z23OkY8', 'name' => '明治屋大阪なんばストアー', 'address' => '大阪市中央区難波５丁目１−５ 髙島屋大阪店地下1階（東ゾーン', 'positions' => DB::raw("ST_GeomFromText('POINT(34.6642731 135.5019757)')"), 'geo_hash' => $g->encode(34.6642731, 135.5019757, 6)]),
@@ -413,5 +423,12 @@ class DatabaseSeeder extends Seeder
         }
 
 //        PurchaseDetail::factory(50)->create();
+        $product_details = [
+            new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 100, 'product_id' => 1, 'date' => now()]),
+        ];
+
+        foreach ($product_details as $product_detail) {
+            $product_detail->save();
+        }
     }
 }

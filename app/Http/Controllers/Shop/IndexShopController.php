@@ -20,7 +20,7 @@ class IndexShopController extends Controller
         // 座標
         $location = preg_split('[,]', $request->query('location'));
 
-        $shops = Shop::query();
+        $shops = Shop::query()->with('purchase_details');
 
         if ($location && is_numeric($location[0] && is_numeric($location[1]))) {
             $g = new Geohash();
