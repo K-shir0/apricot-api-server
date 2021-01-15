@@ -22,7 +22,7 @@ class IndexShopController extends Controller
 
         $shops = Shop::query();
 
-        if ($location) {
+        if ($location && is_numeric($location[0] && is_numeric($location[1]))) {
             $g = new Geohash();
             $present_location = $g->encode($location[0], $location[1], 6);
             $neighbors = collect($g->getNeighbors($present_location))->add($present_location);
