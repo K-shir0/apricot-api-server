@@ -348,6 +348,7 @@ class DatabaseSeeder extends Seeder
 //        Product::factory(5000)->create();
         $products = [
             new Product(['category_id' => 246, 'name' => '十六茶']),
+            new Product(['category_id' => 246, 'name' => '十七茶']),
         ];
 
         foreach ($products as $product) {
@@ -425,6 +426,8 @@ class DatabaseSeeder extends Seeder
 //        PurchaseDetail::factory(50)->create();
         $product_details = [
             new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 100, 'product_id' => 1, 'date' => now()]),
+            new PurchaseDetail(['shop_id' => 'ChIJdRgLohXhAGARz9uNjYkyDMU', 'price' => 97, 'product_id' => 1, 'date' => now()]),
+            new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 100, 'product_id' => 2, 'date' => now()]),
         ];
 
         foreach ($product_details as $product_detail) {
