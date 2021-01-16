@@ -28,9 +28,6 @@ class ShowCategoryPathController extends Controller
                 $path_string = $path_string . " ＞ " . $category->name;
         }
 
-
         return $path_string;
-
-
     }
 }
