@@ -25,7 +25,7 @@ class ShowCategoryPathController extends Controller
             if ($index == $categories->count() - 1)
                 $path_string = $category->name;
             else
-                $path_string = $path_string . "＞" . $category->name;
+                $path_string = $path_string . " ＞ " . $category->name;
         }
 
 
