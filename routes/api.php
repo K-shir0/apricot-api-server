@@ -44,3 +44,5 @@ Route::prefix('category')->group(function () {
 Route::prefix('product')->group(function () {
     Route::get('/', IndexProductController::class);
 });
+
+Route::get('/search', \App\Http\Controllers\Usecase\CategoryOrProductSearchController::class);
