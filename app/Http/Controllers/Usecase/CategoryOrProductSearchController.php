@@ -26,9 +26,20 @@ class CategoryOrProductSearchController extends Controller
             $categories->where('name', 'like', '%' . $searchWord . '%');
         }
 
+        $child_categories = collect([]);
+
+        foreach ($categories->limit(15)->get() as $category) {
+            $child_categories->add($category
+                ->descendantsWithSelf()
+                // 孫まで取得する
+                ->where('depth', '<=', '2')
+                ->get()->toTree()
+            );
+        }
+
         return response()->json([
-            'products' => $products->get(),
-            'categories' => $categories->get()
+            'products' => $products->limit(25)->get(),
+            'categories' => $child_categories
         ]);
     }
 }
