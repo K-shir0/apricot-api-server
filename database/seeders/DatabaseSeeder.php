@@ -426,6 +426,10 @@ class DatabaseSeeder extends Seeder
 //        PurchaseDetail::factory(50)->create();
         $product_details = [
             new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 100, 'product_id' => 1, 'date' => now()]),
+            new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 103, 'product_id' => 1, 'date' => now()]),
+            new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 97, 'product_id' => 1, 'date' => now()]),
+            new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 96, 'product_id' => 1, 'date' => now()]),
+
             new PurchaseDetail(['shop_id' => 'ChIJdRgLohXhAGARz9uNjYkyDMU', 'price' => 97, 'product_id' => 1, 'date' => now()]),
             new PurchaseDetail(['shop_id' => 'ChIJAaQTHCjhAGARq8LLJRC5e2Q', 'price' => 100, 'product_id' => 2, 'date' => now()]),
         ];

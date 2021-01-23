@@ -22,7 +22,11 @@ class IndexShopController extends Controller
         // 商品id
         $product_id_list = $request->query('product_id');
 
-        $shops = Shop::query()->with('purchase_details');
+        $shops = Shop::query()->with(['purchase_details' => function ($q) use ($product_id_list) {
+            if ($product_id_list) {
+                $q->whereIn('product_id', $product_id_list);
+            }
+        }]);
 
         // 座標検索
         if ($location && is_numeric($location[0] && is_numeric($location[1]))) {
