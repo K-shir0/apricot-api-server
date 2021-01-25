@@ -21,6 +21,8 @@ class IndexShopController extends Controller
         $location = preg_split('[,]', $request->query('location'));
         // 商品id
         $product_id_list = $request->query('product_id');
+        // 店名
+        $shop_name_search_strings = preg_split('[ ]', $request->query('shop_name'));
 
         $shops = Shop::query()->with(['purchase_details' => function ($q) use ($product_id_list) {
             if ($product_id_list) {
@@ -44,6 +46,13 @@ class IndexShopController extends Controller
                 $shops->whereHas('purchase_details', function ($query) use ($product_id) {
                     $query->where('product_id', '=', $product_id);
                 });
+            }
+        }
+
+        // 店名検索
+        if ($shop_name_search_strings) {
+            foreach ($shop_name_search_strings as $shop_search_string) {
+                $shops->where('name', 'like', "%$shop_search_string%");
             }
         }
 
