@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Receipt;
 
 use App\Http\Controllers\Controller;
 use App\Models\PurchaseDetail;
+use App\Models\Shop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,20 @@ class AddReceiptController extends Controller
             'storeName' => 'required|string',
             'phoneNumber' => 'required|string',
             'purchaseDate' => 'required|date_format:Y年m月d日',
+            'records' => 'required',
             'records.*.value' => 'required|integer',
             'records.*.name' => 'required|string',
             'records.*.categoryId' => 'required|integer'
         ]);
+
+        $shop = Shop::query()
+            ->where('name', $request->storeName)
+            ->first();
+
+        if (!$shop) {
+            //TODO 番号検索
+            return;
+        }
 
         foreach ($request->records as $record) {
             // モデルに各項目を埋める
@@ -33,7 +44,7 @@ class AddReceiptController extends Controller
 
             $purchase_detail->fill([
                 //TODO 仮置き
-                'shop_id' => 1,
+                'shop_id' => $shop->id,
                 'price' => $record["value"],
                 'date' => Carbon::createFromFormat(
                     'Y年m月d日',
