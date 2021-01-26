@@ -13,7 +13,7 @@ class IndexShopController extends Controller
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
     {
@@ -56,6 +56,6 @@ class IndexShopController extends Controller
             }
         }
 
-        return $shops->get();
+        return response()->json($shops->get());
     }
 }

@@ -7,6 +7,7 @@ use App\Models\PurchaseDetail;
 use App\Models\Shop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AddReceiptController extends Controller
 {
@@ -35,7 +36,10 @@ class AddReceiptController extends Controller
 
         if (!$shop) {
             //TODO 番号検索
-            return;
+            $response = Http::get(config('app.place_api') . $request->phoneNumber);
+            $candidate = $response["candidates"][0];
+
+            $shop = Shop::query()->where('id', $candidate["place_id"])->first();
         }
 
         foreach ($request->records as $record) {
