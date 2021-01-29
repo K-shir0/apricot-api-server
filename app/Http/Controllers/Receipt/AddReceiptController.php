@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Receipt;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\PurchaseDetail;
 use App\Models\Shop;
 use Carbon\Carbon;
@@ -45,20 +46,26 @@ class AddReceiptController extends Controller
         foreach ($request->records as $record) {
             // モデルに各項目を埋める
             $purchase_detail = new PurchaseDetail();
+            $product = Product::query()->where('name', $record["name"])->first();
 
-            $purchase_detail->fill([
-                //TODO 仮置き
-                'shop_id' => $shop->id,
-                'price' => $record["value"],
-                'date' => Carbon::createFromFormat(
-                    'Y年m月d日',
-                    $request->purchaseDate
-                ),
-                'product_id' => 1, //TODO 正規化商品名(name)とカテゴリから商品idを取得する処理、なければ作成
-            ]);
+            if ($product != null) {
 
-            // DB に追加
-            $purchase_detail->save();
+                $purchase_detail->fill([
+                    //TODO 仮置き
+                    'shop_id' => $shop->id,
+                    'price' => $record["value"],
+                    'date' => Carbon::createFromFormat(
+                        'Y年m月d日',
+                        $request->purchaseDate
+                    ),
+                    'product_id' => $product->id, //TODO 正規化商品名(name)とカテゴリから商品idを取得する処理、なければ作成
+                ]);
+
+                // DB に追加
+                $purchase_detail->save();
+
+                dd($purchase_detail->id);
+            }
         }
 
         // 成功レスポンスを返す
