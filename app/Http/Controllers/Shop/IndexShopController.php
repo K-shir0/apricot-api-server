@@ -31,14 +31,14 @@ class IndexShopController extends Controller
         }]);
 
         // 座標検索
-        if ($location && is_numeric($location[0] && is_numeric($location[1]))) {
+        if ($location && is_numeric($location[0]) && is_numeric($location[1])) {
             $g = new Geohash();
             $present_location = $g->encode($location[0], $location[1], 6);
             $neighbors = collect($g->getNeighbors($present_location))->add($present_location);
             $shops->whereIn('geo_hash', $neighbors);
         }
 
-        // 商品id 検索
+        // 商品id 検索3
         if ($product_id_list) {
 
             // 商品id毎にwhereを掛ける
