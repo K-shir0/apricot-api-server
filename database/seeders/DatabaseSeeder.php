@@ -379,7 +379,7 @@ class DatabaseSeeder extends Seeder
             [new Product(['category_id' => 228, 'name' => '亀田製菓 ハッピーターン 108g']), 72, 135],
             [new Product(['category_id' => 228, 'name' => '亀田製菓 亀田の柿の種6袋詰 200g']), 170, 310],
             [new Product(['category_id' => 71, 'name' => '五木食品 からだシフト 糖質コントロール うどん']), 197, 216],
-            [new Product(['category_id' => 72, 'name' => 'おびなた そばの極み八割そば 240ｇ']), 197, 216],
+            [new Product(['category_id' => 73, 'name' => 'おびなた そばの極み八割そば 240ｇ']), 197, 216],
         ];
 
         foreach ($products as $product) {
