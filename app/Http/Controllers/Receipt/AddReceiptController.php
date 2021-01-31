@@ -46,26 +46,44 @@ class AddReceiptController extends Controller
         foreach ($request->records as $record) {
             // モデルに各項目を埋める
             $purchase_detail = new PurchaseDetail();
-            $product = Product::query()->where('name', $record["name"])->first();
+            $product = Product::query()
+                ->where('name', $record["name"])
+                ->first();
 
-            if ($product != null) {
+            $purchase_detail->fill([
+                //TODO 仮置き
+                'shop_id' => $shop->id,
+                'price' => $record["value"],
+                'date' => Carbon::createFromFormat(
+                    'Y年m月d日',
+                    $request->purchaseDate
+                ),
+            ]);
 
-                $purchase_detail->fill([
-                    //TODO 仮置き
-                    'shop_id' => $shop->id,
-                    'price' => $record["value"],
-                    'date' => Carbon::createFromFormat(
-                        'Y年m月d日',
-                        $request->purchaseDate
-                    ),
-                    'product_id' => $product->id, //TODO 正規化商品名(name)とカテゴリから商品idを取得する処理、なければ作成
+            if ($product == null) {
+                $response = Http::asForm()->post(config('app.analysis_api'), [
+                    'word' => $record["name"]
                 ]);
 
-                // DB に追加
-                $purchase_detail->save();
+                $product = Product::query()
+                    ->where('name', $response->body())
+                    ->first();
 
-                dd($purchase_detail->id);
+                if ($product == null) {
+                    $product = Product::query()->create([
+                        'name' => $response->body(),
+                        'category_id' => $record['categoryId']
+                    ]);
+                }
+
+
+                // カテゴリと商品を登録
+                $purchase_detail->fill([
+                    'product_id' => $product->id
+                ]);
             }
+
+            $purchase_detail->save();
         }
 
         // 成功レスポンスを返す

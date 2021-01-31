@@ -124,6 +124,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'place_api' => env('PHONE_NUMBER_URL'),
+    'analysis_api' => env('ANALYSIS_SERVER_URL'),
 
     /*
     |--------------------------------------------------------------------------
