@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Sk\Geohash\Geohash;
 
 class IndexShopController extends Controller
 {
@@ -30,12 +31,12 @@ class IndexShopController extends Controller
         }]);
 
         // 座標検索
-//        if ($location && is_numeric($location[0]) && is_numeric($location[1])) {
-//            $g = new Geohash();
-//            $present_location = $g->encode($location[0], $location[1], 6);
-//            $neighbors = collect($g->getNeighbors($present_location))->add($present_location);
-//            $shops->whereIn('geo_hash', $neighbors);
-//        }
+        if ($location && is_numeric($location[0]) && is_numeric($location[1])) {
+            $g = new Geohash();
+            $present_location = $g->encode($location[0], $location[1], 6);
+            $neighbors = collect($g->getNeighbors($present_location))->add($present_location);
+            $shops->whereIn('geo_hash', $neighbors);
+        }
 
         // 商品id 検索3
         if ($product_id_list) {
