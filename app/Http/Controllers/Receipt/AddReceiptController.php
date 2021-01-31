@@ -51,7 +51,6 @@ class AddReceiptController extends Controller
                 ->first();
 
             $purchase_detail->fill([
-                //TODO 仮置き
                 'shop_id' => $shop->id,
                 'price' => $record["value"],
                 'date' => Carbon::createFromFormat(
@@ -60,15 +59,19 @@ class AddReceiptController extends Controller
                 ),
             ]);
 
+            // 商品が見つからなかったとき
             if ($product == null) {
+                // 正規化
                 $response = Http::asForm()->post(config('app.analysis_api'), [
                     'word' => $record["name"]
                 ]);
 
+                // 検索
                 $product = Product::query()
                     ->where('name', $response->body())
                     ->first();
 
+                // 正規化した商品名でも満つからなかっとき商品を登録
                 if ($product == null) {
                     $product = Product::query()->create([
                         'name' => $response->body(),
@@ -76,8 +79,7 @@ class AddReceiptController extends Controller
                     ]);
                 }
 
-
-                // カテゴリと商品を登録
+                // 商品IDを埋め込む
                 $purchase_detail->fill([
                     'product_id' => $product->id
                 ]);
