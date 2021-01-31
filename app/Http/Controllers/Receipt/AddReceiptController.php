@@ -47,6 +47,7 @@ class AddReceiptController extends Controller
             // モデルに各項目を埋める
             $purchase_detail = new PurchaseDetail();
             $product = Product::query()
+                ->where('category_id', $record['categoryId'])
                 ->where('name', $record["name"])
                 ->first();
 
@@ -68,6 +69,7 @@ class AddReceiptController extends Controller
 
                 // 検索
                 $product = Product::query()
+                    ->where('category_id', $record['categoryId'])
                     ->where('name', $response->body())
                     ->first();
 
